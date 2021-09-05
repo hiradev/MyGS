@@ -10,6 +10,7 @@ import FooterSmall from "components/Footers/FooterSmall.js";
 
 import Login from "views/auth/Login.js";
 import Register from "views/auth/Register.js";
+import {NAVIGATION_ROUTES} from "../navigation/constant/NavigationRoutes";
 
 export default function Auth() {
   return (
@@ -21,9 +22,9 @@ export default function Auth() {
                style={{ backgroundImage: "url(" + require("assets/img/register_bg_2.png").default + ")",}}
           />
           <Switch>
-            <Route path="/auth/login" exact component={Login} />
-            <Route path="/auth/register" exact component={Register} />
-            <Redirect from="/auth" to="/auth/login" />
+            <Route path={NAVIGATION_ROUTES.login} exact component={Login} />
+            <Route path={NAVIGATION_ROUTES.register} exact component={Register} />
+            <Redirect from="/auth" to={NAVIGATION_ROUTES.login} />
           </Switch>
           <FooterSmall absolute />
         </section>

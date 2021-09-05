@@ -48,95 +48,95 @@ import Agri from "../components/Material/Users/Agri";
 import Other from "../components/Material/Users/Other";
 import CardPageVisitsCheck from "../components/Cards/CardPageVisitsCheck";
 import React from "react";
+import {NAVIGATION_ROUTES} from "./constant/NavigationRoutes";
+import {AuthRoute} from "./route/AuthRoute";
+import {ProtectedRoute} from "./route/ProtectedRoute";
 
 const Routes = () => {
     return(
         <BrowserRouter>
             <Switch>
                 {/* add routes with layouts */}
-                <Route path="/admin" component={Admin} />
-                <Route path="/auth" component={Auth} />
+                <AuthRoute path={NAVIGATION_ROUTES.admin} component={Admin} />
+                <ProtectedRoute path={NAVIGATION_ROUTES.auth} component={Auth} />
                 {/* add routes without layouts */}
-                <Route path="/landing" exact component={Landing} />
-                <Route path="/Loglanding" exact component={LogLanding} />
-                <Route path="/profile" exact component={Profile} />
+                <Route path={NAVIGATION_ROUTES.landing} exact component={Landing} />
+                <AuthRoute path={NAVIGATION_ROUTES.login} exact component={LogLanding} />
+                <AuthRoute path={NAVIGATION_ROUTES.logLanding} exact component={Profile} />
                 <Route path="/" exact component={Landing} />
                 {/* add redirect for first page */}
                 {/* <Redirect from="*" to="/" /> */}
 
                 {/* Appointment  */}
-                <Route path="/ViewScheduled"  component={ViewScheduled} />
-                <Route path="/schedule"  component={Schedule} />
-                <Route path="/ViewRequests"  component={ViewRequests} />
-                <Route path="/ViewConfirmed"  component={ViewConfirmed} />
-                <Route path="/UserView"  component={UserView} />
-                <Route path="/UserBooking"  component={UserBooking} />
-
-
+                <AuthRoute path="/ViewScheduled"  component={ViewScheduled} />
+                <AuthRoute path="/schedule"  component={Schedule} />
+                <AuthRoute path="/ViewRequests"  component={ViewRequests} />
+                <AuthRoute path="/ViewConfirmed"  component={ViewConfirmed} />
+                <AuthRoute path="/UserView"  component={UserView} />
+                <AuthRoute path="/UserBooking"  component={UserBooking} />
 
                 {/* Notices */}
-                <Route path="/AddNotice"  component={AddNotice} />
-                <Route path="/noticeView"  component={NoticeTable} />
-                <Route path="/AllNoticeView"  component={AllNotice} />
+                <AuthRoute path="/AddNotice"  component={AddNotice} />
+                <AuthRoute path="/noticeView"  component={NoticeTable} />
+                <AuthRoute path="/AllNoticeView"  component={AllNotice} />
                 {/* sms */}
-                <Route path="/AddMessage"  component={AddMessage} />
-                <Route path="/MessageView"  component={MessageView} />
-                <Route path="/AllMessageView"  component={AllMessageView} />
-
+                <AuthRoute path="/AddMessage"  component={AddMessage} />
+                <AuthRoute path="/MessageView"  component={MessageView} />
+                <AuthRoute path="/AllMessageView"  component={AllMessageView} />
 
                 {/* FINANCE */}
                 {/* Petty Cash */}
-                <Route path="/CashReceive" component={Receive}/>
-                <Route path="/AddExpenses" component={Expense}/>
-                <Route path="/ViewPettycash" component={PettyCash}/>
+                <AuthRoute path="/CashReceive" component={Receive}/>
+                <AuthRoute path="/AddExpenses" component={Expense}/>
+                <AuthRoute path="/ViewPettycash" component={PettyCash}/>
 
                 {/* Forum */}
-                <Route path="/AddForum" component={AddForum}/>
-                <Route path="/AddNewForum" component={AddNewForum}/>
-                <Route path="/forumView" component={ForumTable}/>
-                <Route path="/Forumpage" component={ForumView}/>
+                <AuthRoute path="/AddForum" component={AddForum}/>
+                <AuthRoute path="/AddNewForum" component={AddNewForum}/>
+                <AuthRoute path="/forumView" component={ForumTable}/>
+                <AuthRoute path="/Forumpage" component={ForumView}/>
 
                 {/* Fund */}
-                <Route path="/ViewFund" component={Fund}/>
-                <Route path="/AddReceivedfund" component={ReceivedFund}/>
-                <Route path="/AllocateFund" component={AllocateFund}/>
+                <AuthRoute path="/ViewFund" component={Fund}/>
+                <AuthRoute path="/AddReceivedfund" component={ReceivedFund}/>
+                <AuthRoute path="/AllocateFund" component={AllocateFund}/>
                 {/* <Route path="/CardPageVisits" component={CardPageVisits}/> */}
 
                 {/* Donation */}
-                <Route path="/ViewDonation" component={Donation}/>
-                <Route path="/AddDonation" component={AddDonation}/>
+                <AuthRoute path="/ViewDonation" component={Donation}/>
+                <AuthRoute path="/AddDonation" component={AddDonation}/>
                 {/* <Route path="/viewwdonation" component={ViewDonation}/> */}
                 {/* Material */}
                 {/* Const Material */}
-                <Route path="/ConstMaterial" component={ConstMaterial}/>
-                <Route path="/AddnewconstMaterial" component={AddnewconstMaterial}/>
-                <Route path="/AddconstMaterial" component={AddconstMaterial}/>
-                <Route path="/SupplyconstMaterial" component={SupplyconstMaterial}/>
-                <Route path="/ViewSuppliedconstMaterial" component={ViewSupplyConst}/>
+                <AuthRoute path="/ConstMaterial" component={ConstMaterial}/>
+                <AuthRoute path="/AddnewconstMaterial" component={AddnewconstMaterial}/>
+                <AuthRoute path="/AddconstMaterial" component={AddconstMaterial}/>
+                <AuthRoute path="/SupplyconstMaterial" component={SupplyconstMaterial}/>
+                <AuthRoute path="/ViewSuppliedconstMaterial" component={ViewSupplyConst}/>
 
                 {/* Agri Material */}
-                <Route path="/AgriMaterial" component={AgriMaterial}/>
-                <Route path="/AddnewagriMaterial" component={AddnewagriMaterial}/>
-                <Route path="/AddagriMaterial" component={AddagriMaterial}/>
-                <Route path="/SupplyagriMaterial" component={SupplyagriMaterial}/>
-                <Route path="/ViewSuppliedagriMaterial" component={ViewSupplyAgri}/>
+                <AuthRoute path="/AgriMaterial" component={AgriMaterial}/>
+                <AuthRoute path="/AddnewagriMaterial" component={AddnewagriMaterial}/>
+                <AuthRoute path="/AddagriMaterial" component={AddagriMaterial}/>
+                <AuthRoute path="/SupplyagriMaterial" component={SupplyagriMaterial}/>
+                <AuthRoute path="/ViewSuppliedagriMaterial" component={ViewSupplyAgri}/>
 
                 {/* Other Material */}
-                <Route path="/OtherMaterial" component={OtherMaterial}/>
-                <Route path="/AddnewotherMaterial" component={AddnewotherMaterial}/>
-                <Route path="/AddotherMaterial" component={AddotherMaterial}/>
-                <Route path="/SupplyotherMaterial" component={SupplyotherMaterial}/>
-                <Route path="/ViewSuppliedotherMaterial" component={ViewSupplyOther}/>
+                <AuthRoute path="/OtherMaterial" component={OtherMaterial}/>
+                <AuthRoute path="/AddnewotherMaterial" component={AddnewotherMaterial}/>
+                <AuthRoute path="/AddotherMaterial" component={AddotherMaterial}/>
+                <AuthRoute path="/SupplyotherMaterial" component={SupplyotherMaterial}/>
+                <AuthRoute path="/ViewSuppliedotherMaterial" component={ViewSupplyOther}/>
 
                 {/* Users(Material) */}
-                <Route path ="/Users/Const" component={Const}/>
-                <Route path ="/Users/Agri" component={Agri}/>
-                <Route path ="/Users/Other" component={Other}/>
+                <AuthRoute path ="/Users/Const" component={Const}/>
+                <AuthRoute path ="/Users/Agri" component={Agri}/>
+                <AuthRoute path ="/Users/Other" component={Other}/>
 
                 {/* people */}
 
 
-                <Route path="/CardPageVisitsCheck" component={CardPageVisitsCheck}/>
+                <AuthRoute path="/CardPageVisitsCheck" component={CardPageVisitsCheck}/>
                 {/* <Route path="/CardPageVisits" component={CardPageVisits}/> */}
             </Switch>
         </BrowserRouter>

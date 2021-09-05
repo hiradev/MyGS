@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { axiosInstance, BACKEND_API} from "axios/AxiosInstance";
 import { useSnackbar } from 'notistack';
 import { useDispatch } from "react-redux";
-import authAction from "../../store/action/authAction";
+import {loginUser} from "../../store/action/authAction";
 import { useHistory } from "react-router";
 
 export default function Login() {
@@ -24,7 +24,7 @@ export default function Login() {
       enqueueSnackbar(res.data.message, {
         variant: 'success'
       });
-      dispatch(authAction.loginUser());
+      dispatch(loginUser(res.data.data));
       history.push("/admin/dashboard");
     }).catch((error) => {
       if (error.response) {

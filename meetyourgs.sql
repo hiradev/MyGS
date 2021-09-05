@@ -379,7 +379,7 @@ CREATE TABLE `user` (
   `phone` int(10) NOT NULL,
   `userType` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `password` varchar(12) NOT NULL,
+  `password` varchar(100) NOT NULL,
   `status` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
