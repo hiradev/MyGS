@@ -9,7 +9,11 @@ export const axiosInstance = axios.create({
 });
 
 export const BACKEND_API = {
-    SIGN_IN: BASE_URL + "/auth/login"
+    SIGN_IN: BASE_URL + "/auth/login",
+    REGISTER: BASE_URL + "/auth/sign-up",
+    GET_PEOPLE: BASE_URL + "/people/",
+    ADD_PEOPLE: BASE_URL + "/people/"
+
 }
 
 

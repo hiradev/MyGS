@@ -1,11 +1,17 @@
 import React from "react";
 import { createPopper } from "@popperjs/core";
+import {NAVIGATION_ROUTES} from "../../navigation/constant/NavigationRoutes";
+import {useDispatch} from "react-redux";
+import {useHistory} from "react-router";
+import {logoutUser} from "../../store/action/authAction";
 
 const UserDropdown = () => {
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
   const btnDropdownRef = React.createRef();
   const popoverDropdownRef = React.createRef();
+    const dispatch = useDispatch();
+    const history = useHistory();
   const openDropdownPopover = () => {
     createPopper(btnDropdownRef.current, popoverDropdownRef.current, {
       placement: "bottom-start",
@@ -15,6 +21,13 @@ const UserDropdown = () => {
   const closeDropdownPopover = () => {
     setDropdownPopoverShow(false);
   };
+
+  const handleLogout = (e) => {
+      e.preventDefault()
+      dispatch(logoutUser())
+      history.push(NAVIGATION_ROUTES.login)
+  }
+
   return (
     <>
       <a
@@ -72,13 +85,13 @@ const UserDropdown = () => {
         </a>
         <div className="h-0 my-2 border border-solid border-blueGray-100" />
         <a
-          href="#pablo"
+            href="#pablo"
           className={
             "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
           }
-          onClick={(e) => e.preventDefault()}
+          onClick={(e) => handleLogout(e)}
         >
-          Seprated link
+          Logout
         </a>
       </div>
     </>

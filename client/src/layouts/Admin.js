@@ -15,6 +15,7 @@ import Tables from "views/admin/Tables.js";
 import Notice from "views/admin/Notice.js";
 import Forum from "views/admin/Forum.js"
 import {NAVIGATION_ROUTES} from "../navigation/constant/NavigationRoutes";
+import {People} from "../views/admin/People";
 
 export default function Admin() {
   return (
@@ -34,6 +35,7 @@ export default function Admin() {
             <Route path={NAVIGATION_ROUTES.notice} exact component={Notice} />
             <Route path={NAVIGATION_ROUTES.forum} exact component={Forum} />
             {/* <Route path="/Finance/ViewPettycash" exact component={PettyCash} /> */}
+            <Route path={NAVIGATION_ROUTES.peopleManagement} exact component={People} />
 
             <Redirect from="/admin" to={NAVIGATION_ROUTES.dashboard} />
           </Switch>

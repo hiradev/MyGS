@@ -6,7 +6,8 @@ const router = Router();
 router
     .route('/')
     .get(peopleController.getAllPeople)
-    .post(peopleController.createPeople);
+    .post(peopleController.createPeople)
+    .delete(peopleController.deletePerson);
 
 router
     .route('/getVoters').get(peopleController.getPeopleAbove18);

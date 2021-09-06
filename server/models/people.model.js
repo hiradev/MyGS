@@ -28,7 +28,7 @@ const createPeople = async (regID, firstName, lastName, nic, dob, homeNo, addres
                             ${peopleModel.fields.phone},
                             ${peopleModel.fields.status},
                             ${peopleModel.fields.incomeStatus})
-                           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`, [regID, firstName, lastName, nic, new Date(dob), homeNo, address, phone, status, incomeStatus]);
+                           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`, [regID, firstName, lastName, nic ? nic : "", new Date(dob), homeNo, address, phone, status, incomeStatus]);
 }
 
 const getAllPeople = async () => {
@@ -52,9 +52,14 @@ const findPeopleByRegId = async (regId) => {
     return null;
 }
 
+const deletePeople = async (regId) => {
+    await dbConn.query(`DELETE FROM ${peopleModel.tableName} WHERE ${peopleModel.fields.regId} = ?`, regId)
+}
+
 module.exports = {
     createPeople,
     getAllPeople,
     getPeopleAboveAge,
-    findPeopleByRegId
+    findPeopleByRegId,
+    deletePeople
 }

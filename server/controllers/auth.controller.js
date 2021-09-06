@@ -12,6 +12,7 @@ const sighUp = async (req, res) => {
             res.status(httpStatus.BAD_REQUEST).send({message: "A user with current the email already exists"})
         }
     } catch (err) {
+        console.log(err)
         res.status(httpStatus.INTERNAL_SERVER_ERROR).send({message: "Something went wrong"})
     }
 }
