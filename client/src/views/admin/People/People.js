@@ -1,14 +1,16 @@
 import React, {useEffect, useState} from "react";
 import MaterialTable from "material-table";
 import {CircularProgress} from "@material-ui/core";
-import {axiosInstance, BACKEND_API} from "../../axios/AxiosInstance";
-import {MaterialTableIcons} from "../../layouts/MaterialTableIcons";
+import {axiosInstance, BACKEND_API} from "../../../axios/AxiosInstance";
+import {MaterialTableIcons} from "../../../layouts/MaterialTableIcons";
 import moment from 'moment';
 import Button from "@material-ui/core/Button";
 import AddIcon from '@material-ui/icons/Add';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-import {AddPeopleDialog} from "./AddPeopleDialog";
+import EditIcon from '@material-ui/icons/Edit';
+import {AddPeopleDialog} from "./components/AddPeopleDialog";
 import {useSnackbar} from "notistack";
+import {EditPeopleDialog} from "./components/EditPeopleDialog";
 
 
 export const People = () => {
@@ -17,7 +19,6 @@ export const People = () => {
     const [tableData, setTableData] = useState([]);
     const [isTableDataLoading, setIsTableDataLoading] = useState(false);
 
-    const [isAddViewOpen, setIsAddViewOpen] = useState(false);
     const initialState = {
         regId: "",
         firstName: "",
@@ -31,7 +32,13 @@ export const People = () => {
         incomeStatus: ""
     }
     const [newDetails, setNewDetails] = useState(initialState)
+    const [isAddViewOpen, setIsAddViewOpen] = useState(false);
     const [saveIsLoading, setSaveIsLoading] = useState(false)
+
+    const [updateDetails, setUpdateDetails] = useState(initialState)
+    const [isUpdateViewOpen, setIsUpdateViewOpen] = useState(false);
+    const [updateIsLoading, setUpdateIsLoading] = useState(false)
+
     const [deleteIsLoading, setDeleteIsLoading] = useState(false)
 
     useEffect(() => {
@@ -73,7 +80,7 @@ export const People = () => {
                 });
             }
         }).finally(() => {
-            setSaveIsLoading(false);
+            setDeleteIsLoading(false);
         })
     }
 
@@ -81,6 +88,67 @@ export const People = () => {
         setNewDetails({
             ...newDetails,
             [event.target.name]: event.target.value
+        })
+    }
+
+    const handleUpdateChange = (event) => {
+        setUpdateDetails({
+            ...updateDetails,
+            [event.target.name]: event.target.value
+        })
+    }
+
+    const handleOpenUpdateDialog = () => {
+        setIsUpdateViewOpen(true);
+    }
+
+    const handleCloseUpdateDialog = () => {
+        setIsUpdateViewOpen(false);
+    }
+
+    const handleUpdate = async () => {
+        if (
+            updateDetails.regId === "" ||
+            updateDetails.firstName === "" ||
+            updateDetails.lastName === "" ||
+            updateDetails.dob === "" ||
+            updateDetails.address === "" ||
+            updateDetails.phone === "" ||
+            updateDetails.homeNo === "" ||
+            updateDetails.incomeStatus === "" ||
+            updateDetails.status === ""
+        ) {
+            enqueueSnackbar("Please fill in all fields", {
+                variant: 'warning'
+            });
+            return;
+        }
+
+        setUpdateIsLoading(true)
+        await axiosInstance({
+            method: "PUT",
+            url: BACKEND_API.ADD_PEOPLE,
+            data: updateDetails
+        }).then(() => {
+            enqueueSnackbar("Updated Person", {
+                variant: 'success'
+            });
+            setTableData(tableData.filter((item) => item.RegID !== updateDetails.regId));
+            setTableData([...tableData, updateDetails])
+            setUpdateDetails(initialState);
+            setIsUpdateViewOpen(false);
+        }).catch((error) => {
+            if (error.response) {
+                enqueueSnackbar(error.response.data.message, {
+                    variant: 'error'
+                });
+            } else {
+                enqueueSnackbar("Something went wrong", {
+                    variant: 'error'
+                });
+            }
+        }).finally(() => {
+            setUpdateIsLoading(false);
         })
     }
 
@@ -97,7 +165,6 @@ export const People = () => {
             newDetails.regId === "" ||
             newDetails.firstName === "" ||
             newDetails.lastName === "" ||
-            // newDetails.nic === "" ||
             newDetails.dob === "" ||
             newDetails.address === "" ||
             newDetails.phone === "" ||
@@ -120,9 +187,10 @@ export const People = () => {
             enqueueSnackbar("Added Person", {
                 variant: 'success'
             });
-            setNewDetails(initialState);
             setTableData([...tableData, newDetails])
+            setNewDetails(initialState);
             setIsAddViewOpen(false);
+            window.reload()
         }).catch((error) => {
             if (error.response) {
                 enqueueSnackbar(error.response.data.message, {
@@ -146,6 +214,14 @@ export const People = () => {
                 handleCloseDialog={handleCloseDialog}
                 saveIsLoading={saveIsLoading}
                 handleSave={handleSave}
+            />
+            <EditPeopleDialog
+                updateViewOpen={isUpdateViewOpen}
+                handleChange={handleUpdateChange}
+                handleCloseDialog={handleCloseUpdateDialog}
+                updateIsLoading={updateIsLoading}
+                handleUpdate={handleUpdate}
+                updateDetails={updateDetails}
             />
             <div style={{textAlign: "right", marginBottom: "10px"}}>
                 <Button
@@ -216,14 +292,39 @@ export const People = () => {
                 actions={[
                     () => ({
                         icon: () =>
-                            false ? (
+                            deleteIsLoading ? (
+                                <CircularProgress size={17.5} />
+                            ) : (
+                                <EditIcon />
+                            ),
+                        tooltip: 'Update',
+                        onClick: (_, rowData) => {
+                            setUpdateDetails({
+                                ...updateDetails,
+                                regId: rowData.RegID,
+                                firstName: rowData.fname,
+                                lastName: rowData.lname,
+                                nic: rowData.NIC,
+                                dob: rowData.DOB,
+                                address: rowData.address,
+                                phone: rowData.phone,
+                                homeNo: rowData.home_no,
+                                status: rowData.status,
+                                incomeStatus: rowData.income_status
+                            })
+                            handleOpenUpdateDialog()
+                        }
+                    }),
+                    () => ({
+                        icon: () =>
+                            deleteIsLoading ? (
                                 <CircularProgress size={17.5} />
                             ) : (
                                 <DeleteForeverIcon />
                             ),
                         tooltip: 'Delete Person',
                         onClick: (_, rowData) => handleDelete(rowData.RegID)
-                    })
+                    }),
                 ]}
                 localization={{
                     header: {

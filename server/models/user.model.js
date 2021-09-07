@@ -6,6 +6,7 @@ const saltRounds = 10;
 const userModel = {
     tableName: 'user',
     fields: {
+        userId: "userID",
         firstName: "fname",
         lastName: "lname",
         address: "address",
@@ -48,5 +49,17 @@ const getAllUsers = async () => {
     return null;
 }
 
+const findUserById = async (userId) => {
+    const [rows] = await dbConn.query(`SELECT * FROM ${userModel.tableName} WHERE ${userModel.fields.userId} = ? LIMIT 1`, userId);
 
-module.exports = {createUser, findUserByEmail, getAllUsers};
+    if (rows.length > 0) return rows[0];
+    return null;
+}
+
+
+module.exports = {
+    createUser,
+    findUserByEmail,
+    getAllUsers,
+    findUserById
+};

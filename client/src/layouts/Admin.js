@@ -15,7 +15,7 @@ import Tables from "views/admin/Tables.js";
 import Notice from "views/admin/Notice.js";
 import Forum from "views/admin/Forum.js"
 import {NAVIGATION_ROUTES} from "../navigation/constant/NavigationRoutes";
-import {People} from "../views/admin/People";
+import {People} from "../views/admin/People/People";
 
 export default function Admin() {
   return (

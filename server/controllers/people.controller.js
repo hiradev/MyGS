@@ -16,6 +16,21 @@ const createPeople = async (req, res) => {
     }
 }
 
+const updatePeople = async (req, res) => {
+    try{
+        const user = await peopleModel.findPeopleByRegId(req.body.regId)
+        if (!user) {
+            res.status(httpStatus.BAD_REQUEST).send({message: "Invalid Reg ID"})
+        } else {
+            await peopleModel.updatePeople(req.body.regId, req.body.firstName, req.body.lastName, req.body.nic, req.body.dob, req.body.homeNo, req.body.address, req.body.phone, req.body.status, req.body.incomeStatus);
+            res.status(httpStatus.CREATED).send({message: "Updated User"})
+        }
+    } catch (err) {
+        console.log(err)
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).send({message: "Something went wrong"})
+    }
+}
+
 const getAllPeople = async (req, res) => {
     const users = await peopleModel.getAllPeople();
 
@@ -50,5 +65,6 @@ module.exports = {
     getAllPeople,
     createPeople,
     getPeopleAbove18,
-    deletePerson
+    deletePerson,
+    updatePeople
 }

@@ -2,6 +2,7 @@ const { Router } = require('express');
 const authRoute = require('./auth.route')
 const userRoute = require('./user.route')
 const peopleRoute = require('./people.route')
+const complaintRoute = require('./complaint.route')
 
 const router = Router();
 
@@ -17,6 +18,10 @@ const allRoutes = [
     {
         path: "/people",
         route: peopleRoute
+    },
+    {
+        path: "/complaint",
+        route: complaintRoute
     }
 ]
 

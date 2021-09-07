@@ -12,7 +12,8 @@ const peopleModel = {
         address: "address",
         phone: "phone",
         status: "status",
-        incomeStatus: "income_status"
+        incomeStatus: "income_status",
+        type: "type"
     }
 }
 
@@ -27,8 +28,23 @@ const createPeople = async (regID, firstName, lastName, nic, dob, homeNo, addres
                             ${peopleModel.fields.address},
                             ${peopleModel.fields.phone},
                             ${peopleModel.fields.status},
+                            ${peopleModel.fields.type},
                             ${peopleModel.fields.incomeStatus})
-                           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`, [regID, firstName, lastName, nic ? nic : "", new Date(dob), homeNo, address, phone, status, incomeStatus]);
+                           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`, [regID, firstName, lastName, nic ? nic : "", new Date(dob), homeNo, address, phone, status, "tenant", incomeStatus]);
+}
+
+const updatePeople = async (regID, firstName, lastName, nic, dob, homeNo, address, phone, status, incomeStatus) => {
+    await dbConn.query(`UPDATE ${peopleModel.tableName} SET
+                            ${peopleModel.fields.firstName} = ?,
+                            ${peopleModel.fields.lastName} = ?,
+                            ${peopleModel.fields.NIC} = ?,
+                            ${peopleModel.fields.DOB} = ?,
+                            ${peopleModel.fields.homeNo} = ?,
+                            ${peopleModel.fields.address} = ?,
+                            ${peopleModel.fields.phone} = ?,
+                            ${peopleModel.fields.status} = ?,
+                            ${peopleModel.fields.incomeStatus} = ?
+                            WHERE ${peopleModel.fields.regId} = ?`, [firstName, lastName, nic ? nic : "", new Date(dob), homeNo, address, phone, status, incomeStatus, regID]);
 }
 
 const getAllPeople = async () => {
@@ -61,5 +77,6 @@ module.exports = {
     getAllPeople,
     getPeopleAboveAge,
     findPeopleByRegId,
-    deletePeople
+    deletePeople,
+    updatePeople
 }
