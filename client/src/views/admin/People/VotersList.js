@@ -1,20 +1,19 @@
 import React, {useEffect, useState} from "react";
-import MaterialTable from "material-table";
-import {CircularProgress} from "@material-ui/core";
-import {axiosInstance, BACKEND_API} from "../../../axios/AxiosInstance";
-import {MaterialTableIcons} from "../../../layouts/MaterialTableIcons";
-import moment from 'moment';
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-import EditIcon from '@material-ui/icons/Edit';
-import {useSnackbar} from "notistack";
-import {EditPeopleDialog} from "./components/EditPeopleDialog";
-import PeopleHeader from "./components/PeopleHeader";
 import Sidebar from "../../../components/Sidebar/Sidebar";
 import AdminNavbar from "../../../components/Navbars/AdminNavbar";
+import PeopleHeader from "./components/PeopleHeader";
+import MaterialTable from "material-table";
+import {MaterialTableIcons} from "../../../layouts/MaterialTableIcons";
+import moment from "moment";
+import {CircularProgress} from "@material-ui/core";
+import EditIcon from "@material-ui/icons/Edit";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import FooterAdmin from "../../../components/Footers/FooterAdmin";
+import {EditPeopleDialog} from "./components/EditPeopleDialog";
+import {useSnackbar} from "notistack";
+import {axiosInstance, BACKEND_API} from "../../../axios/AxiosInstance";
 
-export const People = () => {
-
+export const VotersList = () => {
     const { enqueueSnackbar } = useSnackbar();
     const [tableData, setTableData] = useState([]);
     const [isTableDataLoading, setIsTableDataLoading] = useState(false);
@@ -44,7 +43,7 @@ export const People = () => {
             setIsTableDataLoading(true);
             await axiosInstance({
                 method: "GET",
-                url: BACKEND_API.GET_PEOPLE
+                url: BACKEND_API.GET_VOTERS
             }).then(res => {
                 setTableData(res.data)
             }).finally(() => {
@@ -188,7 +187,7 @@ export const People = () => {
                                                     <div className="flex flex-wrap items-center">
                                                         <div className="relative w-full px-4 max-w-full flex-grow flex-1">
                                                             <h3 className="font-semibold text-base text-blueGray-700">
-                                                                Peoples Table
+                                                                Voters List
                                                             </h3>
                                                         </div>
                                                     </div>

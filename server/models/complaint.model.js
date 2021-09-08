@@ -6,6 +6,7 @@ const complaintModel = {
         complaintId: "complaintID",
         topic: "topic",
         problem: "problem",
+        feedback: "feedback",
         date: "date",
         time: "time",
         userId: "userID",
@@ -23,8 +24,21 @@ const addComplaint = async (topic, problem, userId) => {
         [topic, problem, new Date(), new Date(), userId]);
 }
 
+const addFeedback = async (feedback, complaintId) => {
+    await dbConn.query(`UPDATE ${complaintModel.tableName} SET 
+                 ${complaintModel.fields.feedback} = ?
+                 WHERE ${complaintModel.fields.complaintId} = ?`, [feedback, complaintId])
+}
+
+const getComplaintsByUserId = async (userId) => {
+    const [rows] = await dbConn.query(`SELECT * FROM ${complaintModel.tableName} WHERE ${complaintModel.fields.userId} = ?`, [userId])
+
+    if (rows.length > 0) return rows;
+    return null;
+}
+
 const getAllComplaints = async () => {
-    [rows] = await dbConn.query(`SELECT * FROM ${complaintModel.tableName}`)
+    const [rows] = await dbConn.query(`SELECT * FROM ${complaintModel.tableName}`)
 
     if (rows.length > 0) return rows;
     return null;
@@ -32,5 +46,7 @@ const getAllComplaints = async () => {
 
 module.exports = {
     addComplaint,
-    getAllComplaints
+    getAllComplaints,
+    addFeedback,
+    getComplaintsByUserId,
 }

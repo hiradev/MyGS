@@ -15,7 +15,7 @@ export const EditPeopleDialog = (props) => {
             aria-labelledby="attendance"
             PaperProps={{
                 style: {
-                    backgroundColor: "rgb(241, 245, 249)",
+                    backgroundColor: "rgba(241, 245, 249, 100)",
                     boxShadow: 'none',
                 },
             }}
@@ -152,14 +152,15 @@ export const EditPeopleDialog = (props) => {
             </DialogContent>
             <DialogActions>
                 <Button
+                    style={{backgroundColor: "rgba(28, 97, 100, 450)", color: "white", fontWeight: "bold"}}
                     onClick={handleUpdate}
                     disabled={updateIsLoading}
                     startIcon={updateIsLoading ? <CircularProgress size={17.5} /> : null}
-                    variant="contained"
-                    color="primary">
+                    variant="contained">
                     UPDATE
                 </Button>
                 <Button
+                    style={{backgroundColor: "rgba(255, 00, 00, 100)", color: "white", fontWeight: "bold"}}
                     onClick={handleCloseDialog}
                     disabled={updateIsLoading}
                     variant="contained"

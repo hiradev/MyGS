@@ -51,6 +51,9 @@ import React from "react";
 import {NAVIGATION_ROUTES} from "./constant/NavigationRoutes";
 import {AuthRoute} from "./route/AuthRoute";
 import {ProtectedRoute} from "./route/ProtectedRoute";
+import {People} from "../views/admin/People/People";
+import {AddPeople} from "../views/admin/People/components/AddPeople";
+import {VotersList} from "../views/admin/People/VotersList";
 
 const Routes = () => {
     return(
@@ -66,6 +69,9 @@ const Routes = () => {
                 <Route path="/" exact component={Landing} />
                 {/* add redirect for first page */}
                 {/* <Redirect from="*" to="/" /> */}
+                <AuthRoute path={NAVIGATION_ROUTES.peopleManagement} exact component={People} />
+                <AuthRoute path={NAVIGATION_ROUTES.addPeople} exact component={AddPeople} />
+                <AuthRoute path={NAVIGATION_ROUTES.votersList} exact component={VotersList} />
 
                 {/* Appointment  */}
                 <AuthRoute path="/ViewScheduled"  component={ViewScheduled} />
