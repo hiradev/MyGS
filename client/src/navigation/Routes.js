@@ -54,6 +54,8 @@ import {ProtectedRoute} from "./route/ProtectedRoute";
 import {People} from "../views/admin/People/People";
 import {AddPeople} from "../views/admin/People/components/AddPeople";
 import {VotersList} from "../views/admin/People/VotersList";
+import {Chat} from "../views/admin/Chat/Chat";
+import {ComplaintsController} from "../views/admin/Complaints/controller/ComplaintsController";
 
 const Routes = () => {
     return(
@@ -66,12 +68,14 @@ const Routes = () => {
                 <Route path={NAVIGATION_ROUTES.landing} exact component={Landing} />
                 <AuthRoute path={NAVIGATION_ROUTES.login} exact component={LogLanding} />
                 <AuthRoute path={NAVIGATION_ROUTES.logLanding} exact component={Profile} />
+                <AuthRoute path={NAVIGATION_ROUTES.complaints} exact component={ComplaintsController} />
                 <Route path="/" exact component={Landing} />
                 {/* add redirect for first page */}
                 {/* <Redirect from="*" to="/" /> */}
                 <AuthRoute path={NAVIGATION_ROUTES.peopleManagement} exact component={People} />
                 <AuthRoute path={NAVIGATION_ROUTES.addPeople} exact component={AddPeople} />
                 <AuthRoute path={NAVIGATION_ROUTES.votersList} exact component={VotersList} />
+                {/*<AuthRoute path={NAVIGATION_ROUTES.chat} exact component={Chat} />*/}
 
                 {/* Appointment  */}
                 <AuthRoute path="/ViewScheduled"  component={ViewScheduled} />

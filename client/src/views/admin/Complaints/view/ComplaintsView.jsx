@@ -92,7 +92,7 @@ export const ComplaintsView = (props) => {
                     },
                 ]}
                 actions={[
-                    userType !== USER_TYPES.ADMIN ? (
+                    userType === USER_TYPES.ADMIN ? (
                         () => ({
                             icon: () => <EditIcon />,
                             tooltip: 'Update',

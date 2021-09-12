@@ -5,6 +5,7 @@
   "repository": "https://github.com/creativetimofficial/notus-react",
   "license": "MIT",
   "dependencies": {
+    "@ant-design/icons": "^4.6.4",
     "@fortawesome/fontawesome-free": "5.15.3",
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
@@ -30,6 +31,7 @@
     "notistack": "^1.0.10",
     "postcss": "^8.3.6",
     "react": "17.0.1",
+    "react-chat-engine": "^1.11.0",
     "react-dom": "17.0.1",
     "react-redux": "^7.2.5",
     "react-router": "5.2.0",

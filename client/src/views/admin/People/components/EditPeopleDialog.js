@@ -15,8 +15,7 @@ export const EditPeopleDialog = (props) => {
             aria-labelledby="attendance"
             PaperProps={{
                 style: {
-                    backgroundColor: "rgba(241, 245, 249, 100)",
-                    boxShadow: 'none',
+                    backgroundColor: "#b2dedf",
                 },
             }}
             onClose={handleCloseDialog}

@@ -1,7 +1,5 @@
-const dbConn = require("../config/db.config")
+const {dbConn} = require("../config/db.config")
 const bcrypt = require('bcrypt');
-
-const saltRounds = 10;
 
 const userModel = {
     tableName: 'user',
@@ -20,7 +18,7 @@ const userModel = {
 
 
 const createUser = async (firstName, lastName, address, phone, userType, email, password, status) => {
-    const encryptedPass = await bcrypt.hash(password, saltRounds)
+    const encryptedPass = await bcrypt.hash(password, 10)
 
     await dbConn.query(`INSERT INTO ${userModel.tableName}
                            (${userModel.fields.firstName},

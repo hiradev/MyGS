@@ -11,6 +11,7 @@ export const NAVIGATION_ROUTES = {
     peopleManagement: "/peopleManagement",
     addPeople: "/addPeople",
     votersList: "/votersList",
+    chat: "/chat",
     complaints: "/admin/complaints",
 
     auth: "/auth",

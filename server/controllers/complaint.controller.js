@@ -35,7 +35,7 @@ const getComplaintsByUser = async (req, res) => {
             if (!data) {
                 res.status(httpStatus.NO_CONTENT).send({message: "No complaints"})
             } else {
-                res.status(httpStatus.CREATED).send(data)
+                res.status(httpStatus.OK).send(data)
             }
         }
     } catch (err) {

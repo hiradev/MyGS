@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import {loginUser} from "../../store/action/authAction";
 import { useHistory } from "react-router";
 import {NAVIGATION_ROUTES} from "../../navigation/constant/NavigationRoutes";
+import {USER_TYPES} from "../../constants/CommonConstants";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -15,6 +16,21 @@ export default function Login() {
   const history = useHistory();
 
   const handleLogin = async () => {
+    if (email === "" || password === "") {
+      enqueueSnackbar("Please fill in all fields", {
+        variant: 'warning'
+      });
+      return;
+    }
+
+    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (!re.test(email)) {
+      enqueueSnackbar("Please enter valid email", {
+        variant: 'warning'
+      });
+      return;
+    }
+
     await axiosInstance({
       method: "POST",
       url: BACKEND_API.SIGN_IN,
@@ -26,7 +42,11 @@ export default function Login() {
         variant: 'success'
       });
       dispatch(loginUser(res.data.data));
-      history.push(NAVIGATION_ROUTES.dashboard);
+      if(res.data.data.userType === USER_TYPES.ADMIN) {
+        history.push(NAVIGATION_ROUTES.dashboard);
+      } else {
+        history.push(NAVIGATION_ROUTES.logLanding)
+      }
     }).catch((error) => {
       if (error.response) {
         enqueueSnackbar(error.response.data.message, {

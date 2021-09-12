@@ -14,7 +14,7 @@ export const AddFeedbackDialog = (props) => {
             aria-labelledby="complaint"
             PaperProps={{
                 style: {
-                    backgroundColor: "rgb(241, 245, 249)",
+                    backgroundColor: "#b2dedf",
                     boxShadow: 'none',
                 },
             }}
@@ -43,6 +43,7 @@ export const AddFeedbackDialog = (props) => {
             </DialogContent>
             <DialogActions>
                 <Button
+                    style={{backgroundColor: "rgba(28, 97, 100, 450)", color: "white", fontWeight: "bold"}}
                     onClick={handleSaveFeedback}
                     disabled={complaintIsLoading}
                     startIcon={complaintIsLoading ? <CircularProgress size={17.5} /> : null}
@@ -51,6 +52,7 @@ export const AddFeedbackDialog = (props) => {
                     ADD
                 </Button>
                 <Button
+                    style={{backgroundColor: "rgba(255, 00, 00, 100)", color: "white", fontWeight: "bold"}}
                     onClick={handleCloseFeedback}
                     disabled={complaintIsLoading}
                     variant="contained"

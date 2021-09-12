@@ -151,13 +151,13 @@ export const ComplaintsController = () => {
             })
         }
 
-        if (user.userType !== USER_TYPES.ADMIN) {
+        if (user.userType === USER_TYPES.ADMIN) {
             fetchAllComplaints()
         } else {
             fetchUserComplaints()
         }
 
-    }, [])
+    }, [user])
     return(
         <ComplaintsView
             tableData={tableData}
