@@ -10,11 +10,10 @@ const mysql = require('mysql2');
 // })
 
 const pool = mysql.createPool({
-    user: "admin",
-    host: "mysql-49357-0.cloudclusters.net",
-    password: 'htRbbgjw',
-    database: "G3",
-    port: "14123"
+    user: "root",
+    host: "localhost",
+    password: 'root',
+    database: "meetyourgs"
 });
 
 pool.getConnection((err) => {
