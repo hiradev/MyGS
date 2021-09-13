@@ -331,16 +331,16 @@ export default function Sidebar() {
                 <Link
                   className={
                     "text-xs uppercase py-3 font-bold block " +
-                    (window.location.href.indexOf("/admin/maps") !== -1
+                    (window.location.href.indexOf(NAVIGATION_ROUTES.chat) !== -1
                       ? "text-emerald-500 hover:text-emerald-500"
                       : "text-blueGray-700 hover:text-blueGray-500")
                   }
-                  to="/admin/maps"
+                  to={NAVIGATION_ROUTES.chat}
                 >
                   <i
                     className={
                       "fas fa-comment-dots mr-2 text-sm " +
-                      (window.location.href.indexOf("/admin/maps") !== -1
+                      (window.location.href.indexOf(NAVIGATION_ROUTES.chat) !== -1
                         ? "opacity-75"
                         : "text-blueGray-300")
                     }
@@ -349,27 +349,27 @@ export default function Sidebar() {
                 </Link>
               </li>
 
-              <li className="items-center">
-                <Link
-                  className={
-                    "text-xs uppercase py-3 font-bold block " +
-                    (window.location.href.indexOf("/admin/maps") !== -1
-                      ? "text-emerald-500 hover:text-emerald-500"
-                      : "text-blueGray-700 hover:text-blueGray-500")
-                  }
-                  to="/admin/maps"
-                >
-                  <i
-                    className={
-                      "fas fa-address-card mr-2 text-sm " +
-                      (window.location.href.indexOf("/admin/maps") !== -1
-                        ? "opacity-75"
-                        : "text-blueGray-300")
-                    }
-                  ></i>{" "}
-                  Complaint Handling
-                </Link>
-              </li>
+                <li className="items-center">
+                    <Link
+                        className={
+                            "text-xs uppercase py-3 font-bold block " +
+                            (window.location.href.indexOf(NAVIGATION_ROUTES.complaints) !== -1
+                                ? "text-emerald-500 hover:text-emerald-500"
+                                : "text-blueGray-700 hover:text-blueGray-500")
+                        }
+                        to={NAVIGATION_ROUTES.complaints}
+                    >
+                        <i
+                            className={
+                                "fas fa-address-card mr-2 text-sm " +
+                                (window.location.href.indexOf(NAVIGATION_ROUTES.complaints) !== -1
+                                    ? "opacity-75"
+                                    : "text-blueGray-300")
+                            }
+                        />{" "}
+                        Complaint Handling
+                    </Link>
+                </li>
               
               {/* <li className="items-center">
                 <Link

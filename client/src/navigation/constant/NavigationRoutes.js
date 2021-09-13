@@ -8,7 +8,11 @@ export const NAVIGATION_ROUTES = {
     tables: "/admin/tables",
     notice: "/admin/Notice",
     forum: "/admin/Forum",
-    peopleManagement: "/admin/peopleManagement",
+    peopleManagement: "/peopleManagement",
+    addPeople: "/addPeople",
+    votersList: "/votersList",
+    chat: "/chat",
+    complaints: "/admin/complaints",
 
     auth: "/auth",
     register: "/auth/register",
@@ -17,5 +21,4 @@ export const NAVIGATION_ROUTES = {
     landing: "/landing",
     logLanding: "/logLanding",
     profile: "/profile",
-
 }

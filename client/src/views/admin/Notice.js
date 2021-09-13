@@ -10,7 +10,6 @@ export default function Notice() {
         <div className="w-full mb-12 px-4">
           <NoticeTable />
         </div>
-        
       </div>
     </>
   );

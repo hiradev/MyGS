@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "assets/styles/tailwind.css";
+import "assets/styles/index.css";
 import {SnackbarProvider} from "notistack";
 import {Provider} from "react-redux";
 import Routes from "./navigation/Routes";

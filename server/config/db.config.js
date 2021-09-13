@@ -1,20 +1,37 @@
-// const mysql = require('mysql');
-const mysql = require('mysql2');
+const mysql = require('mysql');
+const mysql2 = require('mysql2');
 
 // create the pool
-// const pool = mysql.createPool({
-//     user: "root",
-//     host: "localhost",
-//     password: '',
-//     database: "meetyourgs",
-// })
-
-const pool = mysql.createPool({
+const pool = mysql2.createPool({
     user: "root",
     host: "localhost",
-    password: 'root',
-    database: "meetyourgs"
+    password: '',
+    database: "meetyourgs",
+})
+
+const db = mysql.createConnection({
+    user: "root",
+    host: "localhost",
+    password: '',
+    database: "meetyourgs",
 });
+
+db.connect(function(err) {
+    if (err) {
+        console.error('error connecting: ' + err.stack);
+        return;
+    }
+
+    console.log('connected as id ' + db.threadId);
+});
+
+// const pool = mysql.createPool({
+//     user: "admin",
+//     host: "mysql-49357-0.cloudclusters.net",
+//     password: 'htRbbgjw',
+//     database: "G3",
+//     port: "14123"
+// });
 
 pool.getConnection((err) => {
     if (err) {
@@ -27,4 +44,4 @@ pool.getConnection((err) => {
 // now get a Promise wrapped instance of that pool
 const dbConn = pool.promise();
 
-module.exports = dbConn;
+module.exports = {dbConn, db};

@@ -64,6 +64,14 @@ export default function Register() {
       return;
     }
 
+    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (!re.test(regDetails.email)) {
+      enqueueSnackbar("Please enter valid email", {
+        variant: 'warning'
+      });
+      return;
+    }
+
     await axiosInstance({
       method: "POST",
       url: BACKEND_API.REGISTER,
@@ -72,8 +80,7 @@ export default function Register() {
       enqueueSnackbar(res.data.message, {
         variant: 'success'
       });
-      dispatch(loginUser(regDetails));
-      history.push(NAVIGATION_ROUTES.dashboard);
+      history.push(NAVIGATION_ROUTES.login);
     }).catch((error) => {
       if (error.response) {
         enqueueSnackbar(error.response.data.message, {

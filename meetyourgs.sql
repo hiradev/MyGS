@@ -88,6 +88,7 @@ CREATE TABLE `complaint` (
   `complaintID` int(10) NOT NULL,
   `topic` varchar(150) NOT NULL,
   `problem` varchar(250) NOT NULL,
+  `feedback` varchar(250),
   `date` date NOT NULL,
   `time` time(6) NOT NULL,
   `userID` int(10) NOT NULL
